@@ -13,7 +13,7 @@ var production = process.env.NODE_ENV === 'production';
 var build = function(watch) {
   var bundler;
 
-  bundler = browserify('./app.js', {
+  bundler = browserify('./app/app.js', {
     basedir: __dirname, 
     debug: !production, 
     cache: {}, // required for watchify
@@ -76,7 +76,7 @@ gulp.task('watch:js', ['clean:js'], function() {
 
 gulp.task('serve', ['watch:js', 'css', 'font-awesome:fonts'], function() {
   gulp.watch('sass/*.scss', ['css']);
-  return nodemon({script: 'server.js'});
+  return nodemon({script: './server/server.js'});
 });
 
 gulp.task('build', ['build:js', 'css', 'font-awesome:fonts'], function() {
