@@ -1,7 +1,10 @@
+var _ = require('underscore');
 var assign = require('object-assign');
 var constants = require('./constants');
 var dispatcher = require('./dispatcher');
 var EventEmitter = require('events').EventEmitter;
+
+var CHANGE_EVENT = 'change';
 
 var _store = {
   
@@ -31,13 +34,14 @@ var _store = {
     }
   },
 
-  loadingSession: false,
+  loadingStation: false,
   loadingSong: false,
   loadingConstraint: false
 
 };
 
 var updateStore = function(data) {
+  console.log(data);
   _.each(data, function(value, key) {
       if (key === 'constraints') {
         _.each(data[key], function (constraints, param) {
@@ -47,6 +51,7 @@ var updateStore = function(data) {
         _store[key] = value; 
       }
   });
+  console.log(_store);
 };
 
 var store = assign({}, EventEmitter.prototype, {
@@ -64,9 +69,9 @@ var store = assign({}, EventEmitter.prototype, {
 dispatcher.register(function(payload){
   var action = payload.action;
   switch(action.actionType){
-    case Constants.UPDATE_STORE:
+    case constants.UPDATE_STORE:
       updateStore(action.data);
-      StationStore.emit(CHANGE_EVENT);
+      store.emit(CHANGE_EVENT);
       break;
     default:
       return true;
