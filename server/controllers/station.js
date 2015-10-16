@@ -18,6 +18,7 @@ module.exports = {
       if (error) {
         next();
       } else {
+        // need to also send back constraints
         res.send({
           sessionId: req.query.sessionId
         });
@@ -38,9 +39,9 @@ module.exports = {
     echo('playlist/dynamic/create', opts, function(error, response) {
       
       if (error) {
-        console.log('error in create');
+        console.log('Error in create station:', error);
       }
-
+      // need to also send back constraints
       res.send({
         sessionId: response.session_id
       });
