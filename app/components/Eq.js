@@ -33,7 +33,7 @@ module.exports = Eq = React.createClass({
             title="energy"
             minLabel="calm"
             maxLabel="energetic"
-            loading={this.state.loadingSteer === 'energy'}
+            loading={this.props.loadingConstraint === 'energy'}
             range={true}
           ></EqSlider>
           <EqSlider
@@ -42,7 +42,7 @@ module.exports = Eq = React.createClass({
             title="mood"
             minLabel="sad"
             maxLabel="happy"
-            loading={this.state.loadingSteer === 'valence'}
+            loading={this.props.loadingConstraint === 'valence'}
             range={true}
           ></EqSlider>
           <EqSlider
@@ -51,7 +51,7 @@ module.exports = Eq = React.createClass({
             title="types of songs"
             minLabel="well-known"
             maxLabel="unknown"
-            loading={this.state.loadingSteer === 'adventurousness'}
+            loading={this.props.loadingConstraint === 'adventurousness'}
             range={false}
           ></EqSlider>
           <EqSlider
@@ -60,7 +60,7 @@ module.exports = Eq = React.createClass({
             title="variety of artists"
             minLabel="little"
             maxLabel="lots"
-            loading={this.state.loadingSteer === 'variety'}
+            loading={this.props.loadingConstraint === 'variety'}
             range={false}
           ></EqSlider>
         </div>

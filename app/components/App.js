@@ -62,7 +62,7 @@ module.exports = App = React.createClass({
 
           <div className="col-6">
 
-            <Eq />
+            <Eq loadingConstraint={this.state.loadingConstraint}/>
 
           </div>
         

@@ -57,8 +57,6 @@ module.exports = {
       session_id: req.query.sessionId
     });
 
-    console.log(opts);
-
     echo('playlist/dynamic/steer', opts, function(error, response) {
       
       if (error) {
