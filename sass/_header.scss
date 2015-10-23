@@ -1,0 +1,36 @@
+.header {
+  line-height: 84px;
+  margin: 30px 0;
+}
+
+.header .title {
+  @include paper;
+  border-radius: 100px;
+  display: inline-block;
+  font-size: 32px;
+  // margin-botton: 20px;
+  padding: 0 30px;
+  vertical-align: middle;
+}
+
+.header .title-text {
+  font-weight: $font-weight-bold-light;
+}
+
+.header [class*='fa-star'] {
+  color: $color-empty-star;
+  margin-left: 20px;
+
+  &:hover {
+    color: $color-empty-star-hover;
+    cursor: pointer;
+  }
+}
+
+.header .fa-star {
+  color: $color-highlight;
+
+  &:hover {
+    color: $color-highlight-lightened;
+  }
+}

@@ -6,6 +6,6 @@ module.exports = function(app) {
     .get(station.check, station.create);
 
   app.route('/station/constraint')
-    .put(station.steer);
+    .get(station.steer);
 
 };

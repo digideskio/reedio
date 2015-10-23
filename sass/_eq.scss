@@ -1,0 +1,17 @@
+.eq-paper {
+  @include paper;
+  height: $height-eq;
+  margin: 20px auto;
+  max-width: 480px;  
+}
+
+.eq-body {
+  padding: 14px 0;
+}
+
+@media #{$breakpoint-medium} {
+  .eq-paper {
+    margin: 0;
+    max-width: none;
+  }
+}

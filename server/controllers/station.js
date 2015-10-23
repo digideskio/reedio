@@ -18,7 +18,6 @@ module.exports = {
       if (error) {
         next();
       } else {
-        // need to also send back constraints
         res.send({
           sessionId: req.query.sessionId
         });
@@ -41,7 +40,6 @@ module.exports = {
       if (error) {
         console.log('Error in create station:', error);
       }
-      // need to also send back constraints
       res.send({
         sessionId: response.session_id
       });
@@ -53,10 +51,10 @@ module.exports = {
 
   steer: function(req, res) {
 
-    var params = echonestHelpers.constructConstraintParams(req.body.constraints);
+    var params = echonestHelpers.constructConstraintParams(req.query.constraints);
 
     var opts = _.extend(params, {
-      session_id: req.body.sessionId
+      session_id: req.query.sessionId
     });
 
     console.log(opts);

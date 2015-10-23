@@ -1,0 +1,39 @@
+.player-component {
+  margin: 0 auto;
+  max-width: 480px;
+}
+
+.player-paper {
+  @include paper;
+  height: 270px;
+  line-height: 270px;
+  margin-bottom: $margin-bottom-youtube;
+}
+
+.next-button {
+  @include paper;
+  background-color: $color-highlight;
+  border: none;
+  color: $color-highlight-extra-lightened;
+  height: $height-next-button;
+  line-height: $height-next-button;
+  &:hover {
+    color: white;
+    cursor: pointer;
+  }
+}
+
+.next-button.button-disabled {
+  color: white;
+  background-color: $color-light-grey;
+  &:hover {
+    cursor: default;
+  }
+}
+
+@media #{$breakpoint-medium} {
+  .player-component {
+    margin: 0;
+    max-width: none;
+  }
+}

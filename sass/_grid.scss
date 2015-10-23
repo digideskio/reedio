@@ -1,0 +1,41 @@
+.wrapper,
+.row {
+    @extend %clearfix;
+}
+
+.wrapper {
+    width: 100%;
+    margin: 0 auto;
+}
+
+[class*='col-'] {
+  float: left;
+  padding: 0 20px;
+  width: 100%;
+}
+
+@media #{$breakpoint-medium} {
+
+  .wrapper {
+    max-width: $grid-max-width; 
+  }
+
+  [class*='col-'] {
+    padding: 0 20px;
+    &:first-of-type {
+      padding-left: 40px;
+    }
+    &:last-of-type {
+      padding-right: 40px;
+    }
+  }
+
+  @for $i from 1 through $grid-columns {
+   
+    .col-#{$i} { 
+       width: 100% / $grid-columns * $i;
+    }
+   
+  }
+   
+}

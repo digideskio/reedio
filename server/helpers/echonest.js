@@ -4,17 +4,16 @@ module.exports = {
 
     var params = {};
 
-    _.each(constraints, function(value, key) {
-      if (typeof value === 'object') {
-        params['min_' + key] = value.min;
-        params['max_' + key] = value.max;
+    for (var key in constraints) {
+      if (typeof constraints[key] === 'object') {
+        params['min_' + key] = constraints[key].min;
+        params['max_' + key] = constraints[key].max;
       } else {
         params[key] = value;
       }
-    });
+    }
 
     return params;
-
   }
   
 };

@@ -17,31 +17,15 @@ var _store = {
     ytid: '',
   },
 
-  constraints: {
-    energy: {
-      min: 0.1,
-      max: 0.9
-    },
-    valence: {
-      min: 0.1,
-      max: 0.9
-    },
-    adventurousness: {
-      value: 0.2
-    },
-    variety: {
-      value: 0.5
-    }
-  },
+  list: [],
 
-  loadingStation: false,
-  loadingSong: false,
+  loadingStation: true,
+  loadingSong: true,
   loadingConstraint: false
 
 };
 
 var updateStore = function(data) {
-  console.log(data);
   _.each(data, function(value, key) {
       if (key === 'constraints') {
         _.each(data[key], function (constraints, param) {
@@ -51,7 +35,6 @@ var updateStore = function(data) {
         _store[key] = value; 
       }
   });
-  console.log(_store);
 };
 
 var store = assign({}, EventEmitter.prototype, {

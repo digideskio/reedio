@@ -6,7 +6,6 @@ var actions = {
 
   loadStation: function(genre) {
 
-    console.log('hey!');
     genre = genre || 'ambient';
     
     dispatcher.handleAction({
@@ -26,7 +25,6 @@ var actions = {
         console.log('Error w/ ajax get station:', err);
       },
       success: function(res) {
-        console.log(res.sessionId);
         dispatcher.handleAction({
           actionType: constants.UPDATE_STORE,
           data: {
@@ -38,13 +36,6 @@ var actions = {
           }
         });
 
-        // dispatcher.handleAction({
-        //   actionType: constants.UPDATE_STORE,
-        //   data: {
-        //     constraints: defaultConstraints
-        //   }
-        // });
-
         actions.loadSong(res.sessionId);
       }
     });
@@ -52,8 +43,6 @@ var actions = {
   },
 
   loadSong: function(sessionId) {
-
-    console.log('load song called');
 
     dispatcher.handleAction({
       actionType: constants.UPDATE_STORE,
@@ -70,8 +59,6 @@ var actions = {
         console.log('Error in ajax get song:', err);
       },
       success: function(res) {
-
-        console.log(res.song);
         
         dispatcher.handleAction({
           actionType: constants.UPDATE_STORE,
@@ -98,31 +85,21 @@ var actions = {
 
     $.ajax({
       url: 'station/constraint',
-      method: 'PUT',
-      type: 'PUT',
       data: {
         sessionId: sessionId,
         constraints: constraints
       },
-      dataType: 'json',
       cache: false,
       error: function(err) {
         console.log('Encountered error in ajax get steer');
         console.log('Error:', err);
       },
       success: function(res) {
-        
-        dispatcher.handleAction({
-          actionType: constants.UPDATE_STORE,
-          data: {
-            constraints: constraints
-          }
-        });
 
         dispatcher.handleAction({
           actionType: constants.UPDATE_STORE,
           data: {
-            loadingSteer: undefined
+            loadingConstraint: undefined
           }
         });     
 

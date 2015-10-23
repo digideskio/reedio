@@ -1,0 +1,35 @@
+@import 'animations';
+@import 'mixins';
+@import 'variables';
+
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  @include border-box;
+}
+
+body {
+  background-color: $color-background;
+  color: black;
+  font: $font-dosis;
+  text-align: center;
+}
+
+@import 'grid';
+
+@import 'header';
+
+@import 'player';
+
+@import 'eq';
+
+@import 'eq-header';
+
+@import 'eq-slider';
+
+@import 'station-list';
+
+@import 'station';
+

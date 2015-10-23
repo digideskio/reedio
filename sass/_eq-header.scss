@@ -1,0 +1,29 @@
+.eq-header {
+  background-color: $color-highlight;
+  color: white;
+}
+
+.eq-tab {
+  color: $color-highlight-extra-lightened;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  padding: 10px;
+  width: 50%;
+  &:hover {
+    color: white;
+    cursor: pointer;
+  }
+}
+
+.eq-tab.eq-tab-selected {
+  box-shadow: inset 0 -3px 0 0 $color-highlight-lightened;
+  color: white;
+}
+
+@media #{$breakpoint-medium} {
+  .eq-tab {
+    font-size: 18px;
+  }
+}
