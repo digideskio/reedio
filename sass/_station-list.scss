@@ -1,3 +1,40 @@
 .station-list {
   margin-top: 40px;
+  min-height: 200px;
 }
+
+.station-search {
+  color: $color-highlight;
+  margin: 60px 0 30px 0;
+  font-size: 20px;
+}
+
+.station-search i {
+  margin-right: 10px;
+}
+
+.station-search form {
+  display: inline;
+}
+
+.station-list input {
+  background: $color-light-grey;
+  border: none;
+  // border-bottom: 1px solid $color-empty-star;
+  border-radius: 4px;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  height: 50px;
+  width: 200px;
+  -webkit-appearance: none;
+  &:focus {
+    outline: none;
+  }
+}
+
+.station-list input::-webkit-search-cancel-button {
+  position: relative;
+  right: 8px;    
+}
+
