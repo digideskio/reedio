@@ -10,7 +10,6 @@ module.exports = StationList = React.createClass({
 
     var stations = this.props.list;
 
-
     return (
       <div className="station-list">
 

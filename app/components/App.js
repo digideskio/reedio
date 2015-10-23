@@ -22,6 +22,7 @@ module.exports = App = React.createClass({
   componentDidMount: function(){
     store.addChangeListener(this._onChange);
     actions.loadStation('ambient');
+    actions.loadList();
   },
 
   componentWillUnmount: function(){

@@ -8,4 +8,7 @@ module.exports = function(app) {
   app.route('/station/constraint')
     .get(station.steer);
 
+  app.route('/station/list')
+    .get(station.list);
+
 };

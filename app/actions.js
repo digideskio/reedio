@@ -105,6 +105,25 @@ var actions = {
 
       }
     });
+  },
+
+  loadList: function() {
+
+    $.ajax({
+      url: 'station/list',
+      error: function(err){
+        console.log(err);
+      },
+      success: function(res) {
+        dispatcher.handleAction({
+          actionType: constants.UPDATE_STORE,
+          data: {
+            list: res.list
+          }
+        });
+      } 
+    });
+
   }
 
 };

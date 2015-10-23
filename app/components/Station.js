@@ -1,11 +1,12 @@
 var React = require('react');
 var classnames = require('classnames');
+var actions = require('../actions');
 
 module.exports = Station = React.createClass({
 
   select: function() {
     if (!this.props.current) {
-        Actions.loadStation(this.props.name);
+        actions.loadStation(this.props.name);
      }
   },
 

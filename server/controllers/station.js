@@ -72,8 +72,7 @@ module.exports = {
   list: function(req, res) {
 
     var opts = {
-      start: req.qeury.start,
-      results: 40
+      results: 1383
     };
 
     echo('artist/list_genres', opts, function(error, response) {
@@ -83,7 +82,7 @@ module.exports = {
       } 
 
       res.send({
-        page: res.genres
+        list: response.genres
       });
 
     });
