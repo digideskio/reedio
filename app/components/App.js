@@ -33,6 +33,7 @@ module.exports = App = React.createClass({
     return {
       loadingStation: true,
       loadingSong: true,
+      station: {},
       list: [],
       song: {
         ytid: ''
@@ -48,7 +49,7 @@ module.exports = App = React.createClass({
       <div className="wrapper">
 
         <Header 
-          title={this.state.genre ? this.state.genre + '.fm' : 'reedio.fm'} />
+          title={this.state.station.genre ? this.state.station.genre + '.fm' : 'reedio.fm'} />
 
         <div className="row">
 
@@ -69,7 +70,7 @@ module.exports = App = React.createClass({
         
         </div>
         
-        <StationList current={this.state.genre} list={this.state.list} />
+        <StationList current={this.state.station.genre} list={this.state.list} />
 
       </div>
     )
