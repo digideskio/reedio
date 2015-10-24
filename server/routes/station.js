@@ -11,4 +11,7 @@ module.exports = function(app) {
   app.route('/station/list')
     .get(station.list);
 
+  app.route('/station/similar')
+    .get(station.similar);
+
 };

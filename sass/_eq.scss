@@ -1,5 +1,6 @@
 .eq-paper {
   @include paper;
+  border: none;
   height: $height-eq;
   margin: 20px auto;
   max-width: 480px;  

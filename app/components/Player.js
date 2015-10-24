@@ -84,7 +84,7 @@ module.exports = Player = React.createClass({
           >
           </i>
         </div>
-
+        
       </div>
     )
   }

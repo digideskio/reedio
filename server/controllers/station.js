@@ -75,7 +75,7 @@ module.exports = {
       results: 1383
     };
 
-    echo('artist/list_genres', opts, function(error, response) {
+    echo('genre/list', opts, function(error, response) {
       
       if (error) {
         // res with error
@@ -87,6 +87,25 @@ module.exports = {
 
     });
 
+  },
+
+  similar: function(req, res) {
+
+    var opts = {
+      name: req.query.genre
+    };
+    
+    echo('genre/similar', opts, function(error, response) {
+      
+      if (error) {
+        // res with error
+      } 
+
+      res.send({
+        list: response.genres
+      });
+
+    });
 
   }
 

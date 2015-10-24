@@ -5,9 +5,14 @@
 
 .player-paper {
   @include paper;
+  background-color: black;
   height: 270px;
   line-height: 270px;
   margin-bottom: $margin-bottom-youtube;
+}
+
+.player-paper i {
+  color: darkgrey;
 }
 
 .next-button {

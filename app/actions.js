@@ -1,6 +1,7 @@
 var $ = require('jquery');
 var constants = require('./constants');
 var dispatcher = require('./dispatcher');
+var store = require('./store');
 
 var actions = {
 
@@ -124,6 +125,27 @@ var actions = {
       } 
     });
 
+  },
+
+  getSimilar: function() {
+
+    $.ajax({
+      url: 'station/similar',
+      data: {
+        genre: store.getStore().station.genre
+      },
+      error: function(err) {
+        console.log(err);
+      }, 
+      success: function(res) {
+        dispatcher.handleAction({
+          actionType: constants.UPDATE_STORE,
+          data: {
+            list: res.list
+          }
+        });
+      }
+    });
   }
 
 };

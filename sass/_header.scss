@@ -17,20 +17,32 @@
   font-weight: $font-weight-bold-light;
 }
 
-.header [class*='fa-star'] {
-  color: $color-empty-star;
-  margin-left: 20px;
-
-  &:hover {
-    color: $color-empty-star-hover;
-    cursor: pointer;
-  }
-}
-
-.header .fa-star {
+.header a {
+  text-decoration: none;
+  font-size: 18px;
   color: $color-highlight;
-
-  &:hover {
-    color: $color-highlight-lightened;
+  font-weight: 600;
+  margin-left: 10px;
+  vertical-align: middle;
+  &:visited{
+    color: $color-highlight;
   }
 }
+
+// .header [class*='fa-star'] {
+//   color: $color-empty-star;
+//   margin-left: 20px;
+
+//   &:hover {
+//     color: $color-empty-star-hover;
+//     cursor: pointer;
+//   }
+// }
+
+// .header .fa-star {
+//   color: $color-highlight;
+
+//   &:hover {
+//     color: $color-highlight-lightened;
+//   }
+// }

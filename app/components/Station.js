@@ -7,6 +7,7 @@ module.exports = Station = React.createClass({
   select: function() {
     if (!this.props.current) {
         actions.loadStation(this.props.name);
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
      }
   },
 

@@ -91,6 +91,7 @@
 }
 
 .eq-slider .fa {
+  color: $color-highlight;
   display: block;
   position: absolute;
   top: 4px;
@@ -98,10 +99,8 @@
 }
 
 .eq-slider .fa.fa-check {
-  
   animation-name: fade-out;
   animation-duration: 2s;
-  color: $color-highlight;
   opacity: 0;
 }
 
