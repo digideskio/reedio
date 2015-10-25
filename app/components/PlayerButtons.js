@@ -4,10 +4,6 @@ var actions = require('../actions');
 
 module.exports = PlayerButtons = React.createClass({
 
-  next: function() {
-    actions.loadSong();
-  },
-
   loadSimilar: function() {
     actions.getSimilar();
   },
@@ -22,7 +18,7 @@ module.exports = PlayerButtons = React.createClass({
             'next-button': true,
             'button-disabled': this.props.loadingSong || this.props.loadingStation
           })}
-          onClick={this.props.loadingSong ? undefined: this.next}
+          onClick={this.props.loadingSong ? undefined: this.props.next}
         >
           <i 
             className={classnames({

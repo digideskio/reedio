@@ -9,6 +9,10 @@ var player;
 
 module.exports = Player = React.createClass({
 
+  next: function() {
+    actions.loadSong();
+  },
+
   assignTarget: function(e) {
     player = e.target;
     this.updateVideoState();
@@ -69,7 +73,8 @@ module.exports = Player = React.createClass({
         <PlayerButtons
           loadingStation={this.props.loadingStation}
           loadingSong={this.props.loadingSong} 
-          genre={this.props.genre} />
+          genre={this.props.genre} 
+          next={this.next}/>
         
       </div>
     )
