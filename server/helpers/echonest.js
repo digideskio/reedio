@@ -5,11 +5,11 @@ module.exports = {
     var params = {};
 
     for (var key in constraints) {
-      if (typeof constraints[key] === 'object') {
+      if (key === 'energy' || key === 'valence') {
         params['min_' + key] = constraints[key].min;
         params['max_' + key] = constraints[key].max;
       } else {
-        params[key] = value;
+        params[key] = constraints[key].value;
       }
     }
 

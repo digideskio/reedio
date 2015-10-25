@@ -19,9 +19,31 @@ var _store = {
 
   list: [],
 
+  filter: {
+    search: false,
+    similar: false
+  },
+
   loadingStation: true,
   loadingSong: true,
-  loadingConstraint: false
+  loadingConstraint: false,
+
+  constraints: {
+    energy: {
+      min: 0.1,
+      max: 0.9
+    },
+    valence: {
+      min: 0.1,
+      max: 0.9
+    },
+    adventurousness: {
+      value: 0.2
+    },
+    variety: {
+      value: 0.5
+    }
+  }
 
 };
 

@@ -7,8 +7,6 @@ var actions = {
 
   loadStation: function(genre) {
 
-    genre = genre || 'ambient';
-    
     dispatcher.handleAction({
       actionType: constants.UPDATE_STORE,
       data: {
@@ -16,10 +14,28 @@ var actions = {
       }
     });
 
+    genre = genre || window.localStorage.getItem('last') || 'ambient';
+    var sessionId;
+
+    if (typeof genre === 'string') {
+      sessionId = window.localStorage.getItem(genre) || undefined;
+    }
+
+    if (sessionId) {
+      try {
+        sessionId = JSON.parse(sessionId);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    sessionId = typeof sessionId === 'string' ? sessionId : undefined;
+    
     $.ajax({
       url: 'station',
       data: {
-        genre: genre
+        genre: genre,
+        sessionId: sessionId
       },
       cache: false,
       error: function(err) {
@@ -36,14 +52,19 @@ var actions = {
             loadingStation: false
           }
         });
+        actions.loadConstraints();
+        actions.loadSong();
 
-        actions.loadSong(res.sessionId);
+        window.localStorage.setItem('last', genre);
+        window.localStorage.setItem(genre, res.sessionId);
       }
     });
     
   },
 
-  loadSong: function(sessionId) {
+  loadSong: function() {
+
+    var sessionId = store.getStore().station.sessionId;
 
     dispatcher.handleAction({
       actionType: constants.UPDATE_STORE,
@@ -75,14 +96,22 @@ var actions = {
 
   },
 
-  loadConstraints: function(genre, sessionId, param, constraints) {
-
+  toggleLoadingConstraint: function(param) {
+    var loading = store.getStore().loadingConstraint === param ? false : param;
     dispatcher.handleAction({
       actionType: constants.UPDATE_STORE,
       data: {
-        loadingConstraint: param
+        loadingConstraint: loading 
       }
     }); 
+  },
+
+  loadConstraints: function(constraints) {
+
+    constraints = constraints || store.getStore().constraints;
+
+    var genre = store.getStore().station.genre;
+    var sessionId = store.getStore().station.sessionId;
 
     $.ajax({
       url: 'station/constraint',
@@ -100,7 +129,8 @@ var actions = {
         dispatcher.handleAction({
           actionType: constants.UPDATE_STORE,
           data: {
-            loadingConstraint: undefined
+            constraints: constraints,
+            loadingConstraint: false
           }
         });     
 
@@ -141,9 +171,36 @@ var actions = {
         dispatcher.handleAction({
           actionType: constants.UPDATE_STORE,
           data: {
-            list: res.list
+            filter: {
+              search: false,
+              similar: res.list
+            }
           }
         });
+      }
+    });
+  },
+
+  updateSearchText: function(search) {
+    dispatcher.handleAction({
+      actionType: constants.UPDATE_STORE,
+      data: {
+        filter: {
+          search: search,
+          similar: store.getStore().filter.similar
+        }
+      }
+    });
+  },
+
+  removeFilters: function() {
+    dispatcher.handleAction({
+      actionType: constants.UPDATE_STORE,
+      data: {
+        filter: {
+          search: false,
+          similar: false
+        }
       }
     });
   }

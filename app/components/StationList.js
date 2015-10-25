@@ -9,65 +9,54 @@ module.exports = StationList = React.createClass({
 
   handleTextInput: function(e) {
     e.preventDefault();
-    this.setState({
-      filterText: e.target.value
-    });
+    actions.updateSearchText(e.target.value);
   },
 
   handleFocus: function(e) {
     e.preventDefault();
-    if (this.state.filterText === 'Search genres') {
-      this.setState({
-        filterText: ''
-      });
-    }
+    actions.updateSearchText('');
   },
 
   handleBlur: function(e) {
     e.preventDefault();
-    if (this.state.searchText === '') {
-      this.setState({
-        filterText: 'Search genres'
-      });
+    if (e.target.value === '') {
+      actions.updateSearchText(false);
     }
   },
 
   handleShowAll: function() {
-    this.setState({
-      filterText: 'Search genres'
-    }, function() {
-      actions.loadList();
-    });
+    actions.removeFilters();
   },
 
-  findSimilar: function() {
-    actions.getSimilar();
-  },
+  filterStations: function() {
 
-  getInitialState: function() {
-    return {
-      filterText: 'Search genres'
-    };
+    var stations = this.props.filter.similar || this.props.list;
+
+    var filtered = [];
+
+    if (this.props.filter.search) {
+      var search = this.props.filter.search;
+      for (var i = 0; i < stations.length; i++) {
+        if (stations[i].name.match(search)) {
+          filtered.push(stations[i]);
+        }
+      }
+    } else {
+      filtered = stations;
+    }
+    return filtered;
   },
 
   render: function() {
 
-    var stations = this.props.list;
-
-    var filtered = []; 
-
-    for (var i = 0; i < stations.length; i++) {
-      if (stations[i].name.match(this.state.filterText) || this.state.filterText === 'Search genres') {
-        filtered.push(stations[i]);
-      }
-    }
+    var stations = this.filterStations(); 
 
     return (
       <div className="station-list" id="list">
 
         <div className={classnames({
           'station-search': true,
-          'active': this.state.filterText !== 'Search genres'
+          'active': this.props.filter.search !== false
         })}>
           <i className="fa fa-search"></i>
           <form>
@@ -75,28 +64,20 @@ module.exports = StationList = React.createClass({
               onFocus={this.handleFocus}
               onBlur={this.handleBlur}
               onChange={this.handleTextInput} 
-              value={this.state.filterText}/>            
+              value={this.props.filter.search !== false ? this.props.filter.search : 'Search genres'}/>            
           </form>
 
           <div 
             className="filter-button"
-            onClick={this.findSimilar}
-            style={filtered.length > 1000 && (this.state.filterText === 'Search genres' || this.state.filterText === '') ? {} : {display: 'none'}}
-          >
-            similar to {this.props.current}
-          </div> 
-
-          <div 
-            className="filter-button"
             onClick={this.handleShowAll}
-            style={filtered.length > 1000 ? {display: 'none'} : {}}
+            style={stations.length > 1300 ? {display: 'none'} : {}}
           >
             show all genres
           </div> 
         </div>
 
         {
-          filtered.map(function(station) {
+          stations.map(function(station) {
            
             return <Station
               current={this.props.current === station.name}

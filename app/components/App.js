@@ -1,5 +1,6 @@
 var actions = require('../actions');
 var Eq = require('./Eq');
+var Footer = require('./Footer');
 var Header = require('./Header');
 var Player = require('./Player');
 var React = require('react');
@@ -15,13 +16,14 @@ module.exports = App = React.createClass({
       loadingConstraint: store.getStore().loadingConstraint,
       station: store.getStore().station,
       song: store.getStore().song,
-      list: store.getStore().list
+      list: store.getStore().list,
+      filter: store.getStore().filter
     });
   },
 
   componentDidMount: function(){
     store.addChangeListener(this._onChange);
-    actions.loadStation('ambient');
+    actions.loadStation();
     actions.loadList();
   },
 
@@ -35,6 +37,10 @@ module.exports = App = React.createClass({
       loadingSong: true,
       station: {},
       list: [],
+      filter: {
+        search: false,
+        similar: false
+      },
       song: {
         ytid: ''
       }
@@ -46,38 +52,42 @@ module.exports = App = React.createClass({
 
 
     return (
-      <div className="wrapper">
+      <div>
+        <div className="wrapper">
 
-        <Header 
-          title={this.state.station.genre ? this.state.station.genre + '.fm' : 'reedio.fm'} />
+          <Header 
+            title={this.state.station.genre ? this.state.station.genre + '.fm' : 'reedio.fm'} />
 
-        <div className="row">
+          <div className="row">
 
-          <div className="col-6">
+            <div className="col-6">
 
-            <Player 
-              loadingSession={this.state.loadingSession}
-              loadingSong={this.state.loadingSong}
-              song={this.state.song} />
+              <Player 
+                loadingSession={this.state.loadingSession}
+                loadingSong={this.state.loadingSong}
+                song={this.state.song} 
+                genre={this.state.station.genre} />
 
+            </div>
+
+            <div className="col-6">
+
+              <Eq loadingConstraint={this.state.loadingConstraint}/>
+
+            </div>
+          
           </div>
+          
+          <StationList 
+            current={this.state.station.genre} 
+            list={this.state.list} 
+            filter={this.state.filter} />
 
-          <div className="col-6">
-
-            <Eq loadingConstraint={this.state.loadingConstraint}/>
-
-          </div>
-        
         </div>
-        
-        <StationList current={this.state.station.genre} list={this.state.list} />
 
+        <Footer />
+        
       </div>
     )
   }
 });
-
-
-
-
-  

@@ -1,16 +1,13 @@
-var classnames = require('classnames');
-var React = require('react');
 var actions = require('../actions');
+var classnames = require('classnames');
+var PlayerButtons = require('./PlayerButtons');
+var React = require('react');
 var store = require('../store');
 var Youtube = require('react-youtube');
 
 var player;
 
 module.exports = Player = React.createClass({
-
-  next: function() {
-    actions.loadSong(store.getStore().station.sessionId);
-  },
 
   assignTarget: function(e) {
     player = e.target;
@@ -69,21 +66,10 @@ module.exports = Player = React.createClass({
           {youtube}
         </div>
 
-        <div 
-          className={classnames({
-            'next-button': true,
-            'button-disabled': this.props.loadingSong || this.props.loadingStation
-          })}
-          onClick={this.props.loadingSong === false ? this.next : undefined}
-        >
-          <i 
-            className={classnames({
-              'fa': true,
-              'fa-forward': true,
-            })}
-          >
-          </i>
-        </div>
+        <PlayerButtons
+          loadingStation={this.props.loadingStation}
+          loadingSong={this.props.loadingSong} 
+          genre={this.props.genre} />
         
       </div>
     )

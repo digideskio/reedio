@@ -7,6 +7,8 @@ module.exports = Eq = React.createClass({
 
   handleChange: function(value) {
 
+    actions.toggleLoadingConstraint(this.props.param);
+
     var constraints = {};
 
     if (this.props.range) {
@@ -24,7 +26,7 @@ module.exports = Eq = React.createClass({
       constraints: constraints[this.props.param],
       hasInteracted: true
     }, function() {
-      actions.loadConstraints(store.getStore().station.genre, store.getStore().station.sessionId, this.props.param, constraints);
+      actions.loadConstraints(constraints);
     });
    
   },
