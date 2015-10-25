@@ -1,7 +1,6 @@
 var browserify = require('browserify');
 var del = require('del');
 var gulp = require('gulp');
-var nodemon = require('gulp-nodemon');
 var reactify = require('reactify');
 var sass = require('gulp-sass');
 var source = require('vinyl-source-stream');
@@ -76,7 +75,7 @@ gulp.task('watch:js', ['clean:js'], function() {
 
 gulp.task('serve', ['watch:js', 'css', 'font-awesome:fonts'], function() {
   gulp.watch('sass/*.scss', ['css']);
-  return nodemon({script: './server/server.js'});
+  return require('nodemon')({script: './server/server.js'});
 });
 
 gulp.task('build', ['build:js', 'css', 'font-awesome:fonts'], function() {
