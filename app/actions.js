@@ -14,7 +14,7 @@ var actions = {
       }
     });
 
-    genre = genre || window.localStorage.getItem('last') || 'ambient';
+    genre = genre || window.localStorage.getItem('last') || 'indie rock';
     var sessionId;
 
     if (typeof genre === 'string') {

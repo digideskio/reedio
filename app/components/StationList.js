@@ -28,6 +28,10 @@ module.exports = StationList = React.createClass({
     actions.removeFilters();
   },
 
+  handleSubmit: function(e) {
+    e.preventDefault();
+  },
+
   filterStations: function() {
 
     var stations = this.props.filter.similar || this.props.list;
@@ -67,12 +71,13 @@ module.exports = StationList = React.createClass({
           'active': this.props.filter.search !== false
         })}>
           <i className="fa fa-search"></i>
-          <form>
+          <form onSubmit={this.handleSubmit}> 
             <input 
+              type="text"
               onFocus={this.handleFocus}
               onBlur={this.handleBlur}
-              onChange={this.handleTextInput} 
-              value={this.props.filter.search !== false ? this.props.filter.search : 'Search genres'}/>            
+              onChange={this.handleTextInput}
+              value={this.props.filter.search !== false ? this.props.filter.search : 'Search genres'}/>           
           </form>
 
           <div 
