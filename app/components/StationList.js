@@ -70,7 +70,7 @@ module.exports = StationList = React.createClass({
           <div 
             className="filter-button"
             onClick={this.handleShowAll}
-            style={stations.length > 1300 ? {display: 'none'} : {}}
+            style={this.props.filter.search === false && this.props.filter.similar === false ? {display: 'none'} : {}}
           >
             show all genres
           </div> 
