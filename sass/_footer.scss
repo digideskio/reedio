@@ -5,11 +5,16 @@
 }
 
 .footer .contact {
+  color: white;
   font-size: 16px;
   font-weight: 400px;
   letter-spacing: 1px;
+  text-decoration: none;
   &:hover {
     cursor: pointer;
+  }
+  &:visited {
+    color: inherit;
   }
 }
 
