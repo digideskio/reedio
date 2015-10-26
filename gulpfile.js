@@ -75,7 +75,11 @@ gulp.task('watch:js', ['clean:js'], function() {
 
 gulp.task('serve', ['watch:js', 'css', 'font-awesome:fonts'], function() {
   gulp.watch('sass/*.scss', ['css']);
-  return require('nodemon')({script: './server/server.js'});
+  return require('gulp-nodemon')({
+    exec: 'node-inspector --web-port=8081 & node --debug',
+    ext: 'js',
+    script: './server/server.js'
+  });
 });
 
 gulp.task('build', ['build:js', 'css', 'font-awesome:fonts'], function() {
