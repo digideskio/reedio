@@ -15,7 +15,18 @@ module.exports = self = {
 
   find: function(req, res) {
 
+    var tries = 0;
+
     var next = function() {
+      if (tries > 4) {
+        console.log('tried too many times!');
+        res.send({
+          song: {
+            ytid: ''
+          }
+        });
+        return;
+      }
       self.song(req.query.sessionId)
       .then(self.search)
       .then(self.duration)
@@ -26,6 +37,7 @@ module.exports = self = {
       })
       .catch(function(err) {
         console.log('Error or null after next song recursion, calling next()');
+        tries++;
         next();
       });
     };
