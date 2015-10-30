@@ -5,19 +5,21 @@
   border: none;
   color: $color-highlight-extra-lightened;
   display: inline-block;
-  height: $height-next-button;
+  // height: $height-next-button;
   line-height: $height-next-button;
   width: 49.5%;
   &:hover {
     color: white;
     cursor: pointer;
   }
-  &:first-of-type {
-    margin-right: .5%;
-  }
-  &:last-of-type {
-    margin-left: .5%;
-  }
+}
+
+.player-buttons .next-button {
+    margin-right: .495%;
+}
+
+.player-buttons .similar-button {
+    margin-left: .495%;
 }
 
 .player-buttons .button-disabled {
@@ -30,13 +32,12 @@
 
 .similar-button a {
   color: inherit; //$color-highlight-extra-lightened;
+  display:inline-block;
   font-size: 16px;
   font-weight: 400;
   letter-spacing: 1px;
+  margin-bottom: -2px; // for some reason the a tag makes the button's height bigger by 2px
   text-decoration: none;
-  &:hover {
-    color: inherit;
-  }
 }
 
 @media #{$breakpoint-medium} {

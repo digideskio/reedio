@@ -3,7 +3,8 @@ var classnames = require('classnames');
 var PlayerButtons = require('./PlayerButtons');
 var React = require('react');
 var store = require('../store');
-var Youtube = require('react-youtube');
+//var Youtube = require('react-youtube');
+var YoutubePlayer = require('./YoutubePlayer');
 
 var player;
 
@@ -35,20 +36,24 @@ module.exports = Player = React.createClass({
 
     if (this.props.loadingSong === false) {
       youtube =
+        <YoutubePlayer
+          ytid={this.props.song.ytid}
+          opts={{autoplay: 1}} 
+          onEnd={this.next}/>
         
-        <Youtube
-          url={'http://youtu.be/' + this.props.song.ytid}
-          opts={{
-            height: '100%',
-            width: '100%',
-            playerVars: {
-              autoplay: 1
-            }
-          }}
-          onPlay={this.updateVideoState}
-          onPause={this.updateVideoState}
-          onEnd={this.next}
-          onReady={this.assignTarget} />
+    //     <Youtube
+    //       url={'http://youtu.be/' + this.props.song.ytid}
+    //       opts={{
+    //         height: '100%',
+    //         width: '100%',
+    //         playerVars: {
+    //           autoplay: 1
+    //         }
+    //       }}
+    //       onPlay={this.updateVideoState}
+    //       onPause={this.updateVideoState}
+    //       onEnd={this.next}
+    //       onReady={this.assignTarget} />
 
     } else {
       youtube = 
