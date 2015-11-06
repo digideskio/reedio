@@ -9,20 +9,22 @@ var YoutubePlayer = React.createClass({
     case window.YT.PlayerState.ENDED:
       this.props.onEnd(event);
       break;
-    // // case window.YT.PlayerState.PLAYING:
-    // //   this.props.onPlay(event);
-    // //   break;
-    // // case window.YT.PlayerState.PAUSED:
-    // //   this.props.onPause(event);
-    //   // break;
+    // case window.YT.PlayerState.PLAYING:
+    //   this.props.onPlay(event);
+    //   break;
+    // case window.YT.PlayerState.PAUSED:
+    //   this.props.onPause(event);
+    //   break;
     default:
       return;
     }
   },
 
-  componentWillUpdate: function(newProps) {
-    // console.log(newProps);
-    
+  onPlayerError: function(event) {
+    this.props.onEnd(event);
+  },
+
+  componentWillUpdate: function(newProps) {    
     if (this.state.player !== undefined) {
       this.state.player.loadVideoById(newProps.ytid, 0, 'small');
     }
@@ -38,7 +40,9 @@ var YoutubePlayer = React.createClass({
           videoId: this.props.ytid
       });
       this._stateChangeHandle = globalize(this.onPlayerStateChange);
+      this._errorHandle = globalize(this.onPlayerError);
       player.addEventListener('onStateChange', this._stateChangeHandle);
+      player.addEventListener('onError', this._errorHandle);
       
       this.setState({
         player: player
