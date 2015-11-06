@@ -1,7 +1,7 @@
 var classnames = require('classnames');
 var React = require('react');
 
-module.exports = EqHeader = React.createClass({
+var EqHeader = React.createClass({
 
   render: function() {
 
@@ -36,3 +36,5 @@ module.exports = EqHeader = React.createClass({
     )
   }
 });
+
+module.exports = EqHeader;

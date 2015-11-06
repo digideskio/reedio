@@ -2,7 +2,7 @@ var React = require('react');
 var EqHeader = require('./EqHeader');
 var EqSlider = require('./EqSlider');
 
-module.exports = Eq = React.createClass({
+var Eq = React.createClass({
 
   handleEqTabSelect: function(e) {
     this.setState({
@@ -69,3 +69,5 @@ module.exports = Eq = React.createClass({
     )
   }
 });
+
+module.exports = Eq;

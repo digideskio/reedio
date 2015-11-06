@@ -1,6 +1,6 @@
 var React = require('react');
 
-module.exports = Header = React.createClass({
+var Header = React.createClass({
 
   render: function() {
 
@@ -17,3 +17,5 @@ module.exports = Header = React.createClass({
     )
   }
 });
+
+module.exports = Header;

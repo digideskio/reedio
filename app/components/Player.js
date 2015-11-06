@@ -8,7 +8,7 @@ var YoutubePlayer = require('./YoutubePlayer');
 
 var player;
 
-module.exports = Player = React.createClass({
+var Player = React.createClass({
 
   next: function() {
     actions.loadSong();
@@ -85,3 +85,5 @@ module.exports = Player = React.createClass({
     )
   }
 });
+
+module.exports = Player;

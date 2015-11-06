@@ -2,7 +2,7 @@ var classnames = require('classnames');
 var React = require('react');
 var globalize = require('random-global');
 
-module.exports = YoutubePlayer = React.createClass({
+var YoutubePlayer = React.createClass({
 
   onPlayerStateChange: function(event) {
     switch (event.data) {
@@ -56,3 +56,5 @@ module.exports = YoutubePlayer = React.createClass({
     return <div id="yt-player"></div>
   }
 });
+
+module.exports = YoutubePlayer;

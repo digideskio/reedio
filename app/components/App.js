@@ -7,7 +7,7 @@ var React = require('react');
 var StationList = require('./StationList');
 var store = require('../store');
 
-module.exports = App = React.createClass({
+var App = React.createClass({
 
   _onChange: function(){
     this.setState({
@@ -91,3 +91,5 @@ module.exports = App = React.createClass({
     )
   }
 });
+
+module.exports = App;

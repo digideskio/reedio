@@ -5,7 +5,7 @@ var React = require('react');
 var Station = require('./Station');
 var store = require('../store');
 
-module.exports = StationList = React.createClass({
+var StationList = React.createClass({
 
   handleTextInput: function(e) {
     e.preventDefault();
@@ -104,3 +104,5 @@ module.exports = StationList = React.createClass({
     )
   }
 });
+
+module.exports = StationList;

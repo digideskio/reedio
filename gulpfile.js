@@ -1,7 +1,8 @@
 var browserify = require('browserify');
 var del = require('del');
 var gulp = require('gulp');
-var reactify = require('reactify');
+var lrload = require('livereactload');
+var babelify = require('babelify');
 var sass = require('gulp-sass');
 var source = require('vinyl-source-stream');
 // var uglify = require('gulp-uglify');
@@ -9,22 +10,20 @@ var watchify = require('watchify');
 
 var production = process.env.NODE_ENV === 'production';
 
+var bundler = browserify({
+  entries:      [ "./app/app.js" ],
+  transform:    [ babelify ],
+  plugin:       production ? [] : [ lrload ],
+  debug:        !production,
+  cache:        {}, // for watchify
+  packageCache: {}, // for watchify
+  fullPaths:    !production // for watchify
+});
+
 var build = function(watch) {
-  var bundler;
-
-  bundler = browserify('./app/app.js', {
-    basedir: __dirname, 
-    debug: !production, 
-    cache: {}, // required for watchify
-    packageCache: {}, // required for watchify
-    fullPaths: watch // required to be true only for watchify
-  });
-
   if(watch) {
     bundler = watchify(bundler);
   }
-
-  bundler.transform(reactify);
 
   var rebundle = function() {
     var stream = bundler.bundle();
@@ -78,7 +77,8 @@ gulp.task('serve', ['watch:js', 'css', 'font-awesome:fonts'], function() {
   return require('gulp-nodemon')({
     exec: 'node-inspector --web-port=8081 & node --debug',
     ext: 'js',
-    script: './server/server.js'
+    script: './server/server.js',
+    ignore: ["gulpfile.js", "bundle.js", "node_modules/*", "app/components/*"]
   });
 });
 

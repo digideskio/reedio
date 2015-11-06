@@ -3,7 +3,8 @@ var actions = require('../actions');
 var React = require('react');
 var ReactSlider = require('react-slider');
 var store = require('../store');
-module.exports = Eq = React.createClass({
+
+var EqSlider = React.createClass({
 
   handleChange: function(value) {
 
@@ -103,3 +104,5 @@ module.exports = Eq = React.createClass({
     )
   }
 });
+
+module.exports = EqSlider;

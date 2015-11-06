@@ -1,6 +1,6 @@
 var React = require('react');
 
-module.exports = Footer = React.createClass({
+var Footer = React.createClass({
 
   render: function() {
 
@@ -12,3 +12,5 @@ module.exports = Footer = React.createClass({
     )
   }
 });
+
+module.exports = Footer;

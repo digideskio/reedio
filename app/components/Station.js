@@ -2,7 +2,7 @@ var React = require('react');
 var classnames = require('classnames');
 var actions = require('../actions');
 
-module.exports = Station = React.createClass({
+var Station = React.createClass({
 
   select: function() {
     if (!this.props.current) {
@@ -28,3 +28,5 @@ module.exports = Station = React.createClass({
     )
   }
 });
+
+module.exports = Station;

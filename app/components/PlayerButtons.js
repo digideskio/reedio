@@ -2,7 +2,7 @@ var classnames = require('classnames');
 var React = require('react');
 var actions = require('../actions');
 
-module.exports = PlayerButtons = React.createClass({
+var PlayerButtons = React.createClass({
 
   loadSimilar: function() {
     actions.getSimilar();
@@ -45,3 +45,5 @@ module.exports = PlayerButtons = React.createClass({
     )
   }
 });
+
+module.exports = PlayerButtons;
