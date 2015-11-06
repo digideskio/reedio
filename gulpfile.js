@@ -85,3 +85,7 @@ gulp.task('serve', ['watch:js', 'css', 'font-awesome:fonts'], function() {
 gulp.task('build', ['build:js', 'css', 'font-awesome:fonts'], function() {
   return;
 });
+
+// work around for exit bug and needing to hit ctrl-c twice
+function exitHandler() { process.exit(0); }
+process.once('SIGINT', exitHandler);
