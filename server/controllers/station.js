@@ -1,50 +1,31 @@
-var _ = require('underscore');
-var echobest = require('echo-best');
 var echonest = require('../helpers/echonest');
-
-var key = process.env.ECHONEST_KEY;
-var echo = echobest(key);
 
 module.exports = {
 
   check: function(req, res, next) {
 
-    var opts = {
-      session_id: req.query.sessionId
-    };
-
-    echo('playlist/dynamic/info', opts, function(error, response) {
-      
-      if (error) {
+    echonest.checkStation(req.query.sessionId, function(err, found) {
+      if (err) {
         next();
-      } else {
+      } else if (found) {
         res.send({
           sessionId: req.query.sessionId
         });
       }
-
     });
 
   },
 
   create: function(req, res, next) {
 
-    var opts = {
-      bucket: 'audio_summary',
-      type: 'genre-radio',
-      genre: req.query.genre      
-    };
-
-    echo('playlist/dynamic/create', opts, function(error, response) {
-      
-      if (error) {
-        console.log('Error in create station:', error);
+    echonest.createStation(req.query.genre, function(err, sessionId) {
+      if (err) {
+        next(err);
+      } else if (sessionId) {
+        res.send({
+          sessionId: sessionId
+        });
       }
-      res.send({
-        sessionId: response.session_id
-      });
-      // also save sess and default constraints into db user history
-
     });
 
   },
@@ -53,60 +34,42 @@ module.exports = {
 
     var params = echonest.constructConstraintParams(req.query.constraints);
 
-    var opts = _.extend(params, {
-      session_id: req.query.sessionId
-    });
-
-    echo('playlist/dynamic/steer', opts, function(error, response) {
-      
-      if (error) {
-        // res with error that did not work
+    echonest.steerStation(params, req.query.sessionId, function(err, success) {
+      if (err) {
+        next(err);
+      } else {
+        res.send({
+          success: success
+        });
       }
-
-      res.send({success: true});
-
     });
 
   },
 
   list: function(req, res) {
 
-    var opts = {
-      results: 1383
-    };
-
-    echo('genre/list', opts, function(error, response) {
-      
-      if (error) {
-        // res with error
-      } 
-
-      res.send({
-        list: response.genres
-      });
-
+    echonest.listAllGenres(function(err, list) {
+      if (err) {
+        next(err);
+      } else {
+        res.send({
+          list: list
+        });
+      }
     });
 
   },
 
   similar: function(req, res) {
 
-    var opts = {
-      name: req.query.genre
-    };
-    
-    echo('genre/similar', opts, function(error, response) {
-      
-      if (error) {
-        // res with error
-      } 
-
-      res.send({
-        list: response.genres
-      });
-
+    echonest.getSimilarGenres(req.query.genre, function(err, list) {
+      if (err) {
+        next(err);
+      } else {
+        res.send({
+          list: list
+        });
+      }
     });
-
   }
-
 };

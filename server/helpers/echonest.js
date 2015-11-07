@@ -1,3 +1,4 @@
+var _ = require('underscore');
 var echobest = require('echo-best');
 
 var key = process.env.ECHONEST_KEY;
@@ -24,8 +25,79 @@ module.exports = {
         };
         callback(null, song);
       }
+    });   
+  },
+
+  checkStation: function(sessionId, callback) {
+    var opts = {
+      session_id: sessionId
+    };
+
+    echo('playlist/dynamic/info', opts, function(error, response) {
+      if (error) {
+        callback(error, false);
+      } else {
+        callback(null, true);
+      }
     });
-      
+  },
+
+  createStation: function(genre, callback) {
+    var opts = {
+      bucket: 'audio_summary',
+      type: 'genre-radio',
+      genre: genre      
+    };
+
+    echo('playlist/dynamic/create', opts, function(error, response) {
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, response.session_id);
+      }
+    });
+  },
+
+  steerStation: function(params, sessionId, callback) {
+    var opts = _.extend(params, {
+      session_id: sessionId
+    });
+
+    echo('playlist/dynamic/steer', opts, function(error, success) {
+      if (error) {
+        callback(error, false);
+      } else {
+        callback(null, true);
+      }
+    });
+  },
+
+  listAllGenres: function(callback) {
+    var opts = {
+      results: 1383
+    };
+
+    echo('genre/list', opts, function(error, response) { 
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, response.genres);
+      }
+    });
+  },
+
+  getSimilarGenres: function(genre, callback) {
+    var opts = {
+      name: genre
+    };
+    
+    echo('genre/similar', opts, function(error, response) {
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, response.genres);
+      }
+    });
   },
 
   constructConstraintParams: function(constraints) {

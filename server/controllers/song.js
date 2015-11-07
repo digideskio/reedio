@@ -47,21 +47,6 @@ module.exports = {
       };
 
       echonest.getNextSong(req.query.sessionId, handleEchonestSong);
-
-    //   songController.song(req.query.sessionId)
-    //   .then(songController.search)
-    //   .then(songController.duration)
-    //   .then(function(song) {
-    //     res.send({song: {
-    //       ytid: song.ytid
-    //     }});
-    //   })
-    //   .catch(function(err) {
-    //     console.log('Error or null after tryNext song recursion, calling tryNext()');
-    //     attempts++;
-    //     tryNext();
-    //   });
-    // };
     };
 
     tryNext();
