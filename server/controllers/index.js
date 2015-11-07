@@ -1,6 +1,6 @@
 var JSX = require('node-jsx').install();
 var React = require('react');
-var App = React.createFactory(require('../../app/components/App'));
+var App = React.createFactory(require('../../shared/components/App'));
 var renderToString = require('react-dom/server').renderToString;
 
 module.exports = {

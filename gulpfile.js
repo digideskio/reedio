@@ -11,7 +11,7 @@ var watchify = require('watchify');
 var production = process.env.NODE_ENV === 'production';
 
 var bundler = browserify({
-  entries:      [ "./app/app.js" ],
+  entries:      [ "./client/client.js" ],
   transform:    [ babelify ],
   plugin:       production ? [] : [ lrload ],
   debug:        !production,
