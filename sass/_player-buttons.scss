@@ -23,9 +23,10 @@
 }
 
 .player-buttons .button-disabled {
-  color: white;
+  color: black;
   background-color: $color-light-grey;
   &:hover {
+    color: black;
     cursor: default;
   }
 }

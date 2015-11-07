@@ -23,7 +23,9 @@ var PlayerButtons = React.createClass({
           <i 
             className={classnames({
               'fa': true,
-              'fa-forward': true,
+              'fa-forward': !this.props.loadingSong,
+              'fa-spinner': this.props.loadingSong,
+              'fa-pulse': this.props.loadingSong
             })}
           >
           </i>

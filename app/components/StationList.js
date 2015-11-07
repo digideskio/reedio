@@ -55,16 +55,8 @@ var StationList = React.createClass({
 
     var stations = this.filterStations(); 
 
-    var message = 'If you\'re using Chrome or Safari, you may need to keep this page ' +
-      'open in its own window to allow the music to play in the background. To open a new ' +
-      'window and continue your browsing, hit command + N on Mac or control + N on Windows.';
-
     return (
       <div className="station-list" id="list">
-
-        <span className="announcement">
-          {message}
-        </span>
 
         <div className={classnames({
           'station-search': true,

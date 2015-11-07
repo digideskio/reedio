@@ -2,12 +2,12 @@ var classnames = require('classnames');
 var React = require('react');
 var globalize = require('random-global');
 
-var YoutubePlayer = React.createClass({
+var Youtube = React.createClass({
 
   onPlayerStateChange: function(event) {
     switch (event.data) {
     case window.YT.PlayerState.ENDED:
-      this.props.onEnd(event);
+      this.props.onEndOrError(event);
       break;
     // case window.YT.PlayerState.PLAYING:
     //   this.props.onPlay(event);
@@ -21,13 +21,7 @@ var YoutubePlayer = React.createClass({
   },
 
   onPlayerError: function(event) {
-    this.props.onEnd(event);
-  },
-
-  componentWillUpdate: function(newProps) {    
-    if (this.state.player !== undefined) {
-      this.state.player.loadVideoById(newProps.ytid, 0, 'small');
-    }
+    this.props.onEndOrError(event);
   },
 
   componentDidMount: function() {
@@ -37,23 +31,16 @@ var YoutubePlayer = React.createClass({
           height: '100%',
           width: '100%',
           playerVars: this.props.opts,
-          videoId: this.props.ytid
+          videoId: ''
       });
       this._stateChangeHandle = globalize(this.onPlayerStateChange);
       this._errorHandle = globalize(this.onPlayerError);
       player.addEventListener('onStateChange', this._stateChangeHandle);
       player.addEventListener('onError', this._errorHandle);
       
-      this.setState({
-        player: player
-      });
+      this.props.onMount(player);
+      
     }.bind(this));
-  },
-
-  getInitialState: function () {
-    return {
-      player: undefined
-    };
   },
 
   render: function() {
@@ -61,4 +48,4 @@ var YoutubePlayer = React.createClass({
   }
 });
 
-module.exports = YoutubePlayer;
+module.exports = Youtube;

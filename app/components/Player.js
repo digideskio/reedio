@@ -3,10 +3,7 @@ var classnames = require('classnames');
 var PlayerButtons = require('./PlayerButtons');
 var React = require('react');
 var store = require('../store');
-//var Youtube = require('react-youtube');
-var YoutubePlayer = require('./YoutubePlayer');
-
-var player;
+var Youtube = require('./Youtube');
 
 var Player = React.createClass({
 
@@ -14,65 +11,35 @@ var Player = React.createClass({
     actions.loadSong();
   },
 
-  assignTarget: function(e) {
-    player = e.target;
-    this.updateVideoState();
+  setPlayerToState: function(player) {
+    this.setState({
+      player: player
+    });
   },
 
-  updateVideoState: function() {
-    this.setState({videoState: player.getPlayerState()});
+  componentWillReceiveProps: function(newProps) {
+    if (newProps.song.ytid !== this.props.song.ytid && this.props.song.ytid !== '' && this.state.player !== undefined && window) {
+      this.state.player.loadVideoById(newProps.song.ytid, 0, 'small');  
+    }
   },
-
 
   getInitialState: function () {
       return {
-        videoState: -1
+        player: undefined
       };
   },
 
   render: function() {
 
-    var youtube;
-
-    if (this.props.loadingSong === false) {
-      youtube =
-        <YoutubePlayer
-          ytid={this.props.song.ytid}
-          opts={{autoplay: 1}} 
-          onEnd={this.next}/>
-        
-    //     <Youtube
-    //       url={'http://youtu.be/' + this.props.song.ytid}
-    //       opts={{
-    //         height: '100%',
-    //         width: '100%',
-    //         playerVars: {
-    //           autoplay: 1
-    //         }
-    //       }}
-    //       onPlay={this.updateVideoState}
-    //       onPause={this.updateVideoState}
-    //       onEnd={this.next}
-    //       onReady={this.assignTarget} />
-
-    } else {
-      youtube = 
-
-        <i 
-          className={classnames({
-            'fa': true,
-            'fa-spinner': true,
-            'fa-pulse': true
-          })}
-        >
-        </i>;
-    }
-
     return (
       <div className="player-component">
         
         <div className="player-paper">
-          {youtube}
+          <Youtube
+            ytid={this.props.song.ytid}
+            opts={{autoplay: 1}} 
+            onEndOrError={this.next}
+            onMount={this.setPlayerToState}/>
         </div>
 
         <PlayerButtons

@@ -1,6 +1,6 @@
 var _ = require('underscore');
 var echobest = require('echo-best');
-var echonestHelpers = require('../helpers/echonest');
+var echonest = require('../helpers/echonest');
 
 var key = process.env.ECHONEST_KEY;
 var echo = echobest(key);
@@ -51,7 +51,7 @@ module.exports = {
 
   steer: function(req, res) {
 
-    var params = echonestHelpers.constructConstraintParams(req.query.constraints);
+    var params = echonest.constructConstraintParams(req.query.constraints);
 
     var opts = _.extend(params, {
       session_id: req.query.sessionId
