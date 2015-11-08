@@ -1,25 +1,11 @@
-var actions = require('../actions');
-var Eq = require('./Eq');
+// var Eq = require('./Eq');
 var Footer = require('./Footer');
 var Header = require('./Header');
 var Player = require('./Player');
 var React = require('react');
-var StationList = require('./StationList');
-var store = require('../store');
+// var StationList = require('./StationList');
 
 var App = React.createClass({
-
-  _onChange: function(){
-    this.setState({
-      loadingStation: store.getStore().loadingStation,
-      loadingSong: store.getStore().loadingSong,
-      loadingConstraint: store.getStore().loadingConstraint,
-      station: store.getStore().station,
-      song: store.getStore().song,
-      list: store.getStore().list,
-      filter: store.getStore().filter
-    });
-  },
 
   componentDidMount: function(){
     store.addChangeListener(this._onChange);
@@ -70,16 +56,10 @@ var App = React.createClass({
 
             <div className="col-6">
 
-              <Eq loadingConstraint={this.state.loadingConstraint}/>
 
             </div>
           
           </div>
-          
-          <StationList 
-            current={this.state.station.genre} 
-            list={this.state.list} 
-            filter={this.state.filter} />
 
         </div>
 
@@ -91,3 +71,14 @@ var App = React.createClass({
 });
 
 module.exports = App;
+
+/* pre redux stuff
+
+<Eq loadingConstraint={this.state.loadingConstraint}/>
+
+<StationList 
+  current={this.state.station.genre} 
+  list={this.state.list} 
+  filter={this.state.filter} />
+
+*/
