@@ -1,6 +1,6 @@
 var helpers = require('./redux-actions-helpers');
 
-module.exports = actions = {
+module.exports = {
 
   toggleStationLoading: function(isLoading) {
     return {
@@ -45,9 +45,9 @@ module.exports = actions = {
             genre: genre,
             sessionId: sessionId
           };
-          dispatch(actions.updateStation(station));
-          dispatch(actions.toggleStationLoading(false));
-          actions.loadSong();
+          dispatch(module.exports.updateStation(station));
+          dispatch(module.exports.toggleStationLoading(false));
+          module.exports.loadSong();
           helpers.setLastSessionId(genre, sessionId);
         }
       });
@@ -62,14 +62,14 @@ module.exports = actions = {
       var state = getState();
       var sessionId = state.station.sessionId;
 
-      dispatch(actions.toggleSongLoading(true));
+      dispatch(module.exports.toggleSongLoading(true));
 
       helpers.fetchSong(sessionId, function(err, song) {
         if (err) {
           console.log(err);
         } else {
-          dispatch(actions.updateSong(song));
-          dispatch(actions.toggleSongLoading(false));
+          dispatch(module.exports.updateSong(song));
+          dispatch(module.exports.toggleSongLoading(false));
         }
       }); 
 

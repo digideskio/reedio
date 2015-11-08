@@ -1,10 +1,9 @@
 var createStore = require('redux').createStore;
 var applyMiddleware = require('redux').createStore;
-var reducer = require('./redux-store');
+var reducer = require('./redux-reducer');
 
 var configureStore = function(initialState) {
-  var store = createStore(reducer, initialState);
-  return store;
+  return createStore(reducer, initialState);
 };
 
 var initialState = {

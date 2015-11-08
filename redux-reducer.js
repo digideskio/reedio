@@ -40,3 +40,5 @@ var initialState = {
     song: true, 
   },
 };
+
+module.exports = reducer;

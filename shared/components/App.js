@@ -4,17 +4,14 @@ var Header = require('./Header');
 var Player = require('./Player');
 var React = require('react');
 // var StationList = require('./StationList');
+var connect = require('react-redux').connect;
+var actions = require('../../redux-actions');
 
 var App = React.createClass({
 
   componentDidMount: function(){
-    store.addChangeListener(this._onChange);
     actions.loadStation();
-    actions.loadList();
-  },
-
-  componentWillUnmount: function(){
-    store.removeChangeListener(this._onChange);
+    // actions.loadList();
   },
 
   getInitialState: function() {
@@ -70,7 +67,11 @@ var App = React.createClass({
   }
 });
 
-module.exports = App;
+var select = function(state) {
+  return state.station;
+};
+
+module.exports = connect(select)(App);
 
 /* pre redux stuff
 
