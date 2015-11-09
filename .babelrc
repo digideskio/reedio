@@ -2,11 +2,6 @@
   "env": {
     "production": {
       "plugins": [
-        "react-transform"
-      ]
-    },
-    "development": {
-      "plugins": [
         "react-display-name",
         "react-transform"
       ],
