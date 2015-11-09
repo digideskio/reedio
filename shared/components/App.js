@@ -21,9 +21,12 @@ var App = React.createClass({
     });
   },
 
+  handleYoutubeMount: function() {
+    actions.loadStation();
+  },
+
   componentDidMount: function(){
     store.addChangeListener(this._onChange);
-    actions.loadStation();
     actions.loadList();
   },
 
@@ -64,7 +67,8 @@ var App = React.createClass({
                 loadingSession={this.state.loadingSession}
                 loadingSong={this.state.loadingSong}
                 song={this.state.song} 
-                genre={this.state.station.genre} />
+                genre={this.state.station.genre} 
+                onYoutubeMount={this.handleYoutubeMount} />
 
             </div>
 

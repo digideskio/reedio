@@ -14,13 +14,28 @@ var Player = React.createClass({
   setPlayerToState: function(player) {
     this.setState({
       player: player
+    }, function() {
+      this.props.onYoutubeMount();
     });
   },
 
   componentWillReceiveProps: function(newProps) {
-    if (newProps.song.ytid !== this.props.song.ytid && this.props.song.ytid !== '' && this.state.player !== undefined && window) {
+    if (newProps.song.ytid !== this.props.song.ytid && newProps.song.ytid !== '' && this.state.player !== undefined && window) {
       this.state.player.loadVideoById(newProps.song.ytid, 0, 'small');  
     }
+    // console.log(newProps.song.ytid);
+    // console.log(this.state.player !== undefined);
+    // if (this.state.player && window && newProps.song.ytid !== '') {
+    //   console.log('herree');
+    //   if (newProps.song.ytid !== this.props.song.ytid) {
+    //     console.log('callling load');
+    //     this.state.player.loadVideoById(newProps.song.ytid, 0, 'small');
+    //   } else {
+    //     if (this.state.player.getPlayerState() !== 1) {
+    //       this.state.player.loadVideoById(this.props.song.ytid, 0, 'small')
+    //     }
+    //   }
+    // }
   },
 
   getInitialState: function () {
