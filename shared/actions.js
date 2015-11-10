@@ -112,6 +112,8 @@ var actions = {
 
     var genre = store.getStore().station.genre;
     var sessionId = store.getStore().station.sessionId;
+    console.log('loading constraints called');
+    console.log(sessionId);
 
     $.ajax({
       url: 'station/constraint',

@@ -6,7 +6,13 @@ module.exports = {
 
     echonest.checkStation(req.query.sessionId, function(err, found) {
       if (err) {
-        next();
+        if (next) {
+          next();
+        } else {
+          res.send({
+            sessionId: ''
+          });
+        }
       } else if (found) {
         res.send({
           sessionId: req.query.sessionId
@@ -30,7 +36,7 @@ module.exports = {
 
   },
 
-  steer: function(req, res) {
+  steer: function(req, res, next) {
 
     var params = echonest.constructConstraintParams(req.query.constraints);
 

@@ -9,6 +9,35 @@ var store = require('../store');
 
 var App = React.createClass({
 
+  handleExtensionConstraint: function(counts) {
+    if (counts.positive >= counts.negative) {
+      console.log('more positive');
+      actions.loadConstraints({
+        energy: {
+          min: 0.8,
+          max: 1.0
+        },
+        valence: {
+          min: 0.8,
+          max: 1.0
+        }
+      });
+    } else {
+      console.log('more negative');
+
+      actions.loadConstraints({
+        energy: {
+          min: 0.0,
+          max: 0.2
+        },
+        valence: {
+          min: 0.0,
+          max: 0.2
+        }
+      });
+    }
+  },
+
   _onChange: function(){
     this.setState({
       loadingStation: store.getStore().loadingStation,
@@ -28,6 +57,27 @@ var App = React.createClass({
   componentDidMount: function(){
     store.addChangeListener(this._onChange);
     actions.loadList();
+    
+    var extensionId = "idhcnfdmjkohpcchfggkfmbpebojmeoe";
+
+    chrome.runtime.sendMessage(extensionId, {test: "hey there"}, function(response) {
+      if (response) {
+        console.log(response);
+      }
+    });
+
+    var port = chrome.runtime.connect(extensionId);
+
+    port.onMessage.addListener(function(msg) {
+      console.log(msg);
+      if (msg.counts) {
+        this.handleExtensionConstraint(msg.counts);
+      }
+    }.bind(this));
+
+    this.setState({
+      port: port
+    });
   },
 
   componentWillUnmount: function(){
