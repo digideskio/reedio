@@ -61,6 +61,8 @@ var EqSlider = React.createClass({
     var value = this.state.constraints.value ||
         [this.state.constraints.min, this.state.constraints.max];
 
+    console.log(this.props.constraints);
+
     return (
       <div 
         className={classnames({
@@ -80,7 +82,7 @@ var EqSlider = React.createClass({
             minDistance={0.1}
             withBars={true}
             disabled={this.props.loading}
-            value={value}
+            value={this.props.constraints ? [this.props.constraints.min, this.props.constraints.max] : [0.1, 0.9]}
             onAfterChange={this.handleChange} />
 
           <div className="label min-label">{this.props.minLabel}</div>

@@ -34,6 +34,7 @@ var Eq = React.createClass({
             minLabel="calm"
             maxLabel="energetic"
             loading={this.props.loadingConstraint === 'energy'}
+            constraints={this.props.energy}
             range={true}
           ></EqSlider>
           <EqSlider
@@ -43,6 +44,7 @@ var Eq = React.createClass({
             minLabel="sad"
             maxLabel="happy"
             loading={this.props.loadingConstraint === 'valence'}
+            constraints={this.props.valence}
             range={true}
           ></EqSlider>
           <EqSlider

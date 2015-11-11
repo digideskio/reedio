@@ -22,10 +22,30 @@ var App = React.createClass({
           max: 1.0
         }
       });
+      this.setState({
+        energy: {
+          min: 0.8,
+          max: 1.0
+        },
+        valence: {
+          min: 0.8,
+          max: 1.0
+        }
+      });
     } else {
       console.log('more negative');
 
       actions.loadConstraints({
+        energy: {
+          min: 0.0,
+          max: 0.2
+        },
+        valence: {
+          min: 0.0,
+          max: 0.2
+        }
+      });
+      this.setState({
         energy: {
           min: 0.0,
           max: 0.2
@@ -124,7 +144,10 @@ var App = React.createClass({
 
             <div className="col-6">
 
-              <Eq loadingConstraint={this.state.loadingConstraint}/>
+              <Eq 
+                loadingConstraint={this.state.loadingConstraint}
+                energy={this.state.energy}
+                valence={this.state.valence}/>
 
             </div>
           
