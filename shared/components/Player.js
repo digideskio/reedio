@@ -43,8 +43,8 @@ var Player = React.createClass({
         </div>
 
         <PlayerButtons
-          loadingStation={this.props.loadingStation}
-          loadingSong={this.props.loadingSong} 
+          loadingStation={this.props.loading.station}
+          loadingSong={this.props.loading.song} 
           genre={this.props.genre} 
           next={this.next}/>
         

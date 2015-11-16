@@ -3,17 +3,19 @@ var $ = require('jquery');
 module.exports = {
 
   getLastSessionId: function(genre) {
+    var sessionId;
+
     if (typeof genre === 'string') {
       sessionId = window.localStorage.getItem(genre) || undefined;
     }
 
-    if (sessionId) {
-      try {
-        sessionId = JSON.parse(sessionId);
-      } catch (err) {
-        console.log(err);
-      }
-    }
+    // if (sessionId) {
+    //   try {
+    //     sessionId = JSON.parse(sessionId);
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // }
 
     sessionId = typeof sessionId === 'string' ? sessionId : undefined;
 
@@ -42,7 +44,7 @@ module.exports = {
     window.localStorage.setItem(genre, sessionId);
   },
 
-  fetchSong: function(sessionId) {
+  fetchSong: function(sessionId, callback) {
     $.ajax({
       url: 'song',
       data: {sessionId: sessionId},

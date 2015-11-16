@@ -6,11 +6,17 @@ var reducer = function(state, action) {
   switch (action.type) {
     case 'LOADING_STATION':
       return assign({}, state, {
-        loading: {station: action.isLoading}
+        loading: {
+          station: action.loading,
+          song: state.loading.song,
+        }
       });
     case 'LOADING_SONG':
       return assign({}, state, {
-        loading: {song: action.isLoading}
+        loading: {
+          song: action.loading,
+          station: state.loading.station
+        }
       });
     case 'UPDATE_STATION':
       return assign({}, state, {

@@ -1,9 +1,14 @@
+var applyMiddleware = require('redux').applyMiddleware;
 var createStore = require('redux').createStore;
-var applyMiddleware = require('redux').createStore;
 var reducer = require('./redux-reducer');
+var thunk = require('redux-thunk');
+
+var createStoreWithMiddleware = applyMiddleware(
+  thunk
+)(createStore);
 
 var configureStore = function(initialState) {
-  return createStore(reducer, initialState);
+  return createStoreWithMiddleware(reducer, initialState);
 };
 
 var initialState = {

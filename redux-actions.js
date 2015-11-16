@@ -1,6 +1,6 @@
 var helpers = require('./redux-actions-helpers');
 
-module.exports = {
+var actions = {
 
   toggleStationLoading: function(isLoading) {
     return {
@@ -34,10 +34,12 @@ module.exports = {
     
     return function(dispatch) {
 
+      dispatch(actions.toggleSongLoading(true));
+
       genre = genre || window.localStorage.getItem('last') || 'indie rock';
       var sessionId = helpers.getLastSessionId(genre);
 
-      helpers.fetchSessionId(genre, session, function(err, sessionId) {
+      helpers.fetchSessionId(genre, sessionId, function(err, sessionId) {
         if (err) {
           console.error(err);
         } else {
@@ -45,9 +47,9 @@ module.exports = {
             genre: genre,
             sessionId: sessionId
           };
-          dispatch(module.exports.updateStation(station));
-          dispatch(module.exports.toggleStationLoading(false));
-          module.exports.loadSong();
+          dispatch(actions.updateStation(station));
+          dispatch(actions.toggleStationLoading(false));
+          dispatch(actions.loadSong());
           helpers.setLastSessionId(genre, sessionId);
         }
       });
@@ -62,14 +64,14 @@ module.exports = {
       var state = getState();
       var sessionId = state.station.sessionId;
 
-      dispatch(module.exports.toggleSongLoading(true));
+      dispatch(actions.toggleSongLoading(true));
 
       helpers.fetchSong(sessionId, function(err, song) {
         if (err) {
           console.log(err);
         } else {
-          dispatch(module.exports.updateSong(song));
-          dispatch(module.exports.toggleSongLoading(false));
+          dispatch(actions.updateSong(song));
+          dispatch(actions.toggleSongLoading(false));
         }
       }); 
 
@@ -78,3 +80,5 @@ module.exports = {
   }
 
 };
+
+module.exports = actions;

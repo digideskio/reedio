@@ -10,25 +10,25 @@ var actions = require('../../redux-actions');
 var App = React.createClass({
 
   componentDidMount: function(){
-    actions.loadStation();
+    this.props.dispatch(actions.loadStation());
     // actions.loadList();
   },
 
-  getInitialState: function() {
-    return {
-      loadingStation: true,
-      loadingSong: true,
-      station: {},
-      list: [],
-      filter: {
-        search: false,
-        similar: false
-      },
-      song: {
-        ytid: ''
-      }
-    };
-  },
+  // getInitialState: function() {
+  //   return {
+  //     loadingStation: true,
+  //     loadingSong: true,
+  //     station: {},
+  //     list: [],
+  //     filter: {
+  //       search: false,
+  //       similar: false
+  //     },
+  //     song: {
+  //       ytid: ''
+  //     }
+  //   };
+  // },
 
   render: function() {
 
@@ -37,17 +37,16 @@ var App = React.createClass({
         <div className="wrapper">
 
           <Header 
-            title={this.state.station.genre ? this.state.station.genre + '.fm' : 'reedio.fm'} />
+            title={this.props.station.genre ? this.props.station.genre + '.fm' : 'reedio.fm'} />
 
           <div className="row">
 
             <div className="col-6">
 
               <Player 
-                loadingSession={this.state.loadingSession}
-                loadingSong={this.state.loadingSong}
-                song={this.state.song} 
-                genre={this.state.station.genre} />
+                loading={this.props.loading}
+                song={this.props.song} 
+                genre={this.props.station.genre} />
 
             </div>
 
@@ -68,7 +67,7 @@ var App = React.createClass({
 });
 
 var select = function(state) {
-  return state.station;
+  return state;
 };
 
 module.exports = connect(select)(App);
