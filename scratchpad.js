@@ -25,24 +25,23 @@
 
 var store = {
 
-  station: {
-    genre: '',
-    sessionId: ''
-  },
+station: {
+genre: '',
+sessionId: ''
+},
 
-  song: {
-    ytid: ''
-  },
+song: {
+ytid: ''
+},
 
-  loading: {
-    station: true,
-    song: true, 
-  },
+loading: {
+station: true,
+song: true,
+},
 
-  stationList: {
-    type: 'all',
-    stations: []
-  },
-  
-};
+stationList: {
+type: 'all',
+stations: []
+},
 
+}

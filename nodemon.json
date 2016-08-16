@@ -1,0 +1,4 @@
+{
+	"ignore": ["npm-debug.log", "public", "dist/"],
+	"verbose": true
+}

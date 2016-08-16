@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  reedio:
+    build: .
+    restart: always
+    ports:
+      - '8080:8080'
+    environment:
+      - NODE_ENV=production
+      - REEDIO_SPOTIFY_CLIENT_ID
+      - REEDIO_SPOTIFY_CLIENT_SECRET
+      - REEDIO_YOUTUBE_KEY
+    command: sh -c "./node_modules/.bin/node-sass sass/main.scss dist/css/main.css --output-style compressed ./node_modules/.bin/webpack && node ."

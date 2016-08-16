@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  bot:
+    image: node:latest
+    restart: always
+    ports:
+      - '8080:8080'
+    environment:
+      - NODE_ENV=development
+      - REEDIO_SPOTIFY_CLIENT_ID
+      - REEDIO_SPOTIFY_CLIENT_SECRET
+      - REEDIO_YOUTUBE_KEY
+    volumes:
+      - .:/usr/src/app
+    command: sh -c "cd /usr/src/app; npm run start:dev"

@@ -1,18 +1,4 @@
 {
-  "env": {
-    "production": {
-      "plugins": [
-        "react-display-name",
-        "react-transform"
-      ],
-      "extra": {
-        "react-transform": {
-          "transforms": [{
-            "transform": "livereactload/babel-transform",
-            "imports": ["react"]
-          }]
-        }
-      }
-    }
-  }
+	"presets": ["node6", "react", "stage-2"],
+	"plugins": ["transform-async-to-generator"]
 }

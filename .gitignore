@@ -1,6 +1,3 @@
 node_modules
-public/css
-public/fonts
-public/js
-.env
+dist/
 npm-debug.log
